@@ -20,7 +20,6 @@ export default class PVP extends Battle {
       this._playerOne.attack(this._playerTwo);
       this._playerTwo.attack(this._playerOne);
     }
-
     const resultBattle = super.fight();
     return resultBattle;
   }
