@@ -1,13 +1,13 @@
-import Character from '../Character';
+// import Character from '../Character';
 import Fighter, { SimpleFighter } from '../Fighter';
 import Monster from '../Monster';
 import Battle from './Battle';
 
 export default class PVE extends Battle {
-  private _player: Character;
-  private _monsters: Monster[] | Fighter[] | SimpleFighter[];
+  protected _player: Fighter;
+  protected _monsters: Monster[] | Fighter[] | SimpleFighter[];
 
-  constructor(player: Character, monsters: Monster[] | Fighter[] | SimpleFighter[]) {
+  constructor(player: Fighter, monsters: Monster[] | Fighter[] | SimpleFighter[]) {
     super(player);
     this._player = player;
     this._monsters = monsters;
@@ -18,9 +18,9 @@ export default class PVE extends Battle {
   }
 
   override fight(): number {
-    this._monsters.forEach((opponent) => {
+    this._monsters.forEach((opponent: Monster | Fighter | SimpleFighter) => {
       if (this._player.lifePoints !== -1 || !this.allMonstersDefeat()) {
-        this._player.attack(opponent);
+        this._player.attack(opponent as Fighter);
         opponent.attack(this._player);
       }
     });
